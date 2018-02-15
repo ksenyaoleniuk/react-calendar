@@ -1,0 +1,23 @@
+.cell{
+    align-items: center;
+    display: flex;
+    flex-grow: 1;
+    flex-basis: 0;
+    justify-content: center;
+    font-weight: bold;
+}
+.cell__dates{
+    display: flex;
+    flex-flow: column;
+    flex-grow: 7;
+    flex-basis: 0;
+}
+.cell__date{
+    cursor: pointer;
+}
+
+.cell__date:hover{
+    background-color: pink;
+    border: solid 1px pink;
+    color: #ffffff;
+}
