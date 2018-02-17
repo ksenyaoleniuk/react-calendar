@@ -11,7 +11,7 @@
 }
 
 .calendar__title{
-    flex-grow: 3;
+    flex-grow: 5;
 }
 
 .calendar:after{
@@ -19,10 +19,13 @@
     display: block;
     padding-bottom: 100%;
 }
-.calendar .calendar_content{
+.calendar .calendar__content{
     position: absolute;
     width: 100%;
     height: 100%;
     display: flex;
     flex-flow: column;
 }
+
+
+

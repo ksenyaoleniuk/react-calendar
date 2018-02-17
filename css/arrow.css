@@ -4,7 +4,6 @@
     cursor: pointer;
 }
 .arrow__prev:before,
-
 .arrow__next:before{
     content: "";
     display: inline-block;

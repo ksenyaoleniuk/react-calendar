@@ -9,7 +9,7 @@
 .cell__dates{
     display: flex;
     flex-flow: column;
-    flex-grow: 7;
+    flex-grow: 6;
     flex-basis: 0;
 }
 .cell__date{
@@ -20,4 +20,19 @@
     background-color: pink;
     border: solid 1px pink;
     color: #ffffff;
+}
+
+.calendar .cell__dates .calendar__row{
+    flex-grow: 1;
+}
+.calendar{
+     max-width: 280px;
+     margin: auto;
+     position: relative;
+ }
+
+.calendar__row{
+    display: flex;
+    flex-flow: row;
+    flex-grow: 1;
 }
