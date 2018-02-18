@@ -84,6 +84,7 @@ class Calendar extends Component {
                             }}>
                     </Header>
                     <MonthDates month={this.state.month}
+
                                 year={this.state.year}
                                 daysInMonth={this.state.daysInMonth}
                                 firstOfMonth={this.state.firstOfMonth}
