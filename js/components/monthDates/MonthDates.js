@@ -58,7 +58,8 @@ class MonthDates extends Component {
                                         }
                                         </div>)
                                     }
-                                    return (<div className="cell" key={i}></div>)
+                                    return (
+                                        <div className="cell" key={i}></div>)
                                 })
 
 
