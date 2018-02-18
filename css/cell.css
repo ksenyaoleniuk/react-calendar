@@ -1,4 +1,4 @@
-.cell{
+.cell {
     align-items: center;
     display: flex;
     flex-grow: 1;
@@ -6,32 +6,35 @@
     justify-content: center;
     font-weight: bold;
 }
-.cell__dates{
+
+.cell__dates {
     display: flex;
     flex-flow: column;
     flex-grow: 6;
     flex-basis: 0;
 }
-.cell__date{
+
+.cell__date {
     cursor: pointer;
 }
 
-.cell__date:hover{
+.cell__date:hover {
     background-color: pink;
     border: solid 1px pink;
     color: #ffffff;
 }
 
-.calendar .cell__dates .calendar__row{
+.calendar .cell__dates .calendar__row {
     flex-grow: 1;
 }
-.calendar{
-     max-width: 280px;
-     margin: auto;
-     position: relative;
- }
 
-.calendar__row{
+.calendar {
+    max-width: 280px;
+    margin: auto;
+    position: relative;
+}
+
+.calendar__row {
     display: flex;
     flex-flow: row;
     flex-grow: 1;

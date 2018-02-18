@@ -1,18 +1,17 @@
 import React, {Component} from 'react';
 
-class MonthDates extends Component{
+class MonthDates extends Component {
 
-    // statics: {
-    constructor(){
+    constructor() {
         super();
         this.state = {
-            date:new Date(),
+            date: new Date(),
             year: new Date().getFullYear(),
             month: new Date().getMonth(),
             date: new Date().getDate(),
-
             today: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())
-        }}
+        }
+    }
 
     render() {
         let haystack,
@@ -21,7 +20,7 @@ class MonthDates extends Component{
             current,
             isDate,
             className,
-            weekStack = Array.apply(null, { length: 7 }).map(Number.call, Number),
+            weekStack = Array.apply(null, {length: 7}).map(Number.call, Number),
             that = this,
             startDay = this.props.firstOfMonth.getUTCDay(),
             first = this.props.firstOfMonth.getDay(),
@@ -32,7 +31,7 @@ class MonthDates extends Component{
         }
 
         className = rows === 6 ? 'cell__dates' : 'cell__dates';
-        haystack = Array.apply(null, { length: rows }).map(Number.call, Number);
+        haystack = Array.apply(null, {length: rows}).map(Number.call, Number);
         day = this.props.startDay + 1 - first;
         while (day > 1) {
             day -= 7;
@@ -40,7 +39,7 @@ class MonthDates extends Component{
         day -= 1;
 
         return (
-            <div className = {className}>
+            <div className={className}>
                 {
                     haystack.map(function (item, i) {
                         d = day + i * 7;
@@ -52,8 +51,8 @@ class MonthDates extends Component{
                                     if (isDate) {
                                         current = new Date(that.props.year, that.props.month, d);
                                         className = current != that.constructor.today ? 'cell cell__date' : 'cell cell__date';
-                                        return (<div className = {className}
-                                                     role = "button"
+                                        return (<div className={className}
+                                                     role="button"
                                                      key={i}> {
                                             d
                                         }
@@ -70,5 +69,8 @@ class MonthDates extends Component{
 
             </div>
 
-        )}}
+        )
+    }
+}
+
 export default MonthDates;

@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import MonthDates from "../monthDates/MonthDates";
 import Header from "../header/Header";
 
-class Calendar extends Component{
+class Calendar extends Component {
     constructor() {
         super();
         let date = new Date();
@@ -72,25 +72,29 @@ class Calendar extends Component{
     render() {
         return (
             <div className="calendar">
-                <div className = "calendar__content">
+                <div className="calendar__content">
                     <Header monthNames={this.state.monthNamesFull}
                             month={this.state.month}
                             year={this.state.year}
-                            onPrev={() => {return this.getPrev()}}
-                            onNext={() => {return this.getNext()}}
-                    ></Header>
+                            onPrev={() => {
+                                return this.getPrev()
+                            }}
+                            onNext={() => {
+                                return this.getNext()
+                            }}>
+                    </Header>
                     <MonthDates month={this.state.month}
                                 year={this.state.year}
                                 daysInMonth={this.state.daysInMonth}
                                 firstOfMonth={this.state.firstOfMonth}
-                                startDay={this.state.startDay}
-                    ></MonthDates>
-                </div></div>
-        )}}
+                                startDay={this.state.startDay}>
+                    </MonthDates>
+                </div>
+            </div>
+        )
+    }
+}
 
 
-
-// ReactDOM.render(React.createElement(Calendar, {
-// }), document.getElementById("calendar"));
 const wrapper = document.getElementById("calendar");
 wrapper ? ReactDOM.render(<Calendar/>, wrapper) : false;

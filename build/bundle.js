@@ -1085,14 +1085,12 @@ var Calendar = function (_Component) {
                         },
                         onNext: function onNext() {
                             return _this2.getNext();
-                        }
-                    }),
+                        } }),
                     _react2.default.createElement(_MonthDates2.default, { month: this.state.month,
                         year: this.state.year,
                         daysInMonth: this.state.daysInMonth,
                         firstOfMonth: this.state.firstOfMonth,
-                        startDay: this.state.startDay
-                    })
+                        startDay: this.state.startDay })
                 )
             );
         }
@@ -1100,10 +1098,6 @@ var Calendar = function (_Component) {
 
     return Calendar;
 }(_react.Component);
-
-// ReactDOM.render(React.createElement(Calendar, {
-// }), document.getElementById("calendar"));
-
 
 var wrapper = document.getElementById("calendar");
 wrapper ? _reactDom2.default.render(_react2.default.createElement(Calendar, null), wrapper) : false;
@@ -18446,7 +18440,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var MonthDates = function (_Component) {
     _inherits(MonthDates, _Component);
 
-    // statics: {
     function MonthDates() {
         var _this$state;
 
@@ -18458,7 +18451,8 @@ var MonthDates = function (_Component) {
             date: new Date(),
             year: new Date().getFullYear(),
             month: new Date().getMonth()
-        }, _defineProperty(_this$state, 'date', new Date().getDate()), _defineProperty(_this$state, 'today', new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())), _this$state);return _this;
+        }, _defineProperty(_this$state, 'date', new Date().getDate()), _defineProperty(_this$state, 'today', new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())), _this$state);
+        return _this;
     }
 
     _createClass(MonthDates, [{
@@ -18566,8 +18560,7 @@ var Header = function (_Component) {
                 { className: "calendar__row" },
                 _react2.default.createElement("div", { className: "cell arrow__prev",
                     onClick: this.props.onPrev.bind(this),
-                    role: "button"
-                }),
+                    role: "button" }),
                 _react2.default.createElement(
                     "div",
                     { className: "cell calendar__title" },
@@ -18575,8 +18568,7 @@ var Header = function (_Component) {
                 ),
                 _react2.default.createElement("div", { className: "cell arrow__next",
                     onClick: this.props.onNext.bind(this),
-                    role: "button"
-                })
+                    role: "button" })
             );
         }
     }]);

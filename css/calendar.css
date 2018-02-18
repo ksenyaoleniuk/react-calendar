@@ -1,10 +1,10 @@
-.calendar{
+.calendar {
     max-width: 280px;
     margin: auto;
     position: relative;
 }
 
-.calendar__row{
+.calendar__row {
     display: flex;
     flex-flow: row;
     flex-grow: 1;
