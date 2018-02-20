@@ -1087,6 +1087,7 @@ var Calendar = function (_Component) {
                             return _this2.getNext();
                         } }),
                     _react2.default.createElement(_MonthDates2.default, { month: this.state.month,
+
                         year: this.state.year,
                         daysInMonth: this.state.daysInMonth,
                         firstOfMonth: this.state.firstOfMonth,
@@ -18429,8 +18430,6 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -18441,40 +18440,42 @@ var MonthDates = function (_Component) {
     _inherits(MonthDates, _Component);
 
     function MonthDates() {
-        var _this$state;
-
         _classCallCheck(this, MonthDates);
 
         var _this = _possibleConstructorReturn(this, (MonthDates.__proto__ || Object.getPrototypeOf(MonthDates)).call(this));
 
-        _this.state = (_this$state = {
-            date: new Date(),
+        _this.state = {
             year: new Date().getFullYear(),
-            month: new Date().getMonth()
-        }, _defineProperty(_this$state, 'date', new Date().getDate()), _defineProperty(_this$state, 'today', new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())), _this$state);
+            month: new Date().getMonth(),
+            date: new Date().getDate(),
+            today: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())
+        };
         return _this;
     }
 
     _createClass(MonthDates, [{
-        key: 'render',
+        key: "render",
         value: function render() {
             var haystack = void 0,
                 day = void 0,
                 d = void 0,
                 current = void 0,
                 isDate = void 0,
-                className = void 0,
+                renderDates = void 0,
+                renderRows = void 0,
                 weekStack = Array.apply(null, { length: 7 }).map(Number.call, Number),
                 that = this,
                 startDay = this.props.firstOfMonth.getUTCDay(),
                 first = this.props.firstOfMonth.getDay(),
                 rows = 5;
 
-            if (startDay === 5 && this.props.daysInMonth === 31 || startDay == 6 && this.props.daysInMonth > 29) {
+            var daysInMonth = this.props.daysInMonth;
+
+
+            if (startDay === 5 && daysInMonth === 31 || startDay === 6 && daysInMonth > 29) {
                 rows = 6;
             }
 
-            className = rows === 6 ? 'cell__dates' : 'cell__dates';
             haystack = Array.apply(null, { length: rows }).map(Number.call, Number);
             day = this.props.startDay + 1 - first;
             while (day > 1) {
@@ -18482,33 +18483,41 @@ var MonthDates = function (_Component) {
             }
             day -= 1;
 
-            return _react2.default.createElement(
-                'div',
-                { className: className },
-                haystack.map(function (item, i) {
+            renderDates = function renderDates(d) {
+                return weekStack.map(function (item, i) {
+                    d += 1;
+                    isDate = d > 0 && d <= daysInMonth;
+                    if (isDate) {
+                        current = new Date(that.props.year, that.props.month, d);
+                        return _react2.default.createElement(
+                            "div",
+                            { className: "cell cell__date",
+                                role: "button",
+                                key: i },
+                            " ",
+                            d,
+                            " "
+                        );
+                    }
+                    return _react2.default.createElement("div", { className: "cell", key: i });
+                });
+            };
+
+            renderRows = function renderRows() {
+                return haystack.map(function (item, i) {
                     d = day + i * 7;
                     return _react2.default.createElement(
-                        'div',
-                        { className: 'calendar__row', key: i },
-                        weekStack.map(function (item, i) {
-                            d += 1;
-                            isDate = d > 0 && d <= that.props.daysInMonth;
-                            if (isDate) {
-                                current = new Date(that.props.year, that.props.month, d);
-                                className = current != that.constructor.today ? 'cell cell__date' : 'cell cell__date';
-                                return _react2.default.createElement(
-                                    'div',
-                                    { className: className,
-                                        role: 'button',
-                                        key: i },
-                                    ' ',
-                                    d
-                                );
-                            }
-                            return _react2.default.createElement('div', { className: 'cell', key: i });
-                        })
+                        "div",
+                        { className: "calendar__row", key: i },
+                        renderDates(d)
                     );
-                })
+                });
+            };
+
+            return _react2.default.createElement(
+                "div",
+                { className: "cell__dates" },
+                renderRows()
             );
         }
     }]);

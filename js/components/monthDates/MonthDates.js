@@ -5,7 +5,6 @@ class MonthDates extends Component {
     constructor() {
         super();
         this.state = {
-            date: new Date(),
             year: new Date().getFullYear(),
             month: new Date().getMonth(),
             date: new Date().getDate(),
@@ -19,18 +18,20 @@ class MonthDates extends Component {
             d,
             current,
             isDate,
-            className,
+            renderDates,
+            renderRows,
             weekStack = Array.apply(null, {length: 7}).map(Number.call, Number),
             that = this,
             startDay = this.props.firstOfMonth.getUTCDay(),
             first = this.props.firstOfMonth.getDay(),
             rows = 5;
 
-        if (startDay === 5 && this.props.daysInMonth === 31 || startDay == 6 && this.props.daysInMonth > 29) {
+        const {daysInMonth} = this.props;
+
+        if (startDay === 5 && daysInMonth === 31 || startDay === 6 && daysInMonth > 29) {
             rows = 6;
         }
 
-        className = rows === 6 ? 'cell__dates' : 'cell__dates';
         haystack = Array.apply(null, {length: rows}).map(Number.call, Number);
         day = this.props.startDay + 1 - first;
         while (day > 1) {
@@ -38,38 +39,37 @@ class MonthDates extends Component {
         }
         day -= 1;
 
-        return (
-            <div className={className}>
-                {
-                    haystack.map(function (item, i) {
-                        d = day + i * 7;
-                        return (<div className="calendar__row" key={i}>
-                            {
-                                weekStack.map(function (item, i) {
-                                    d += 1;
-                                    isDate = d > 0 && d <= that.props.daysInMonth;
-                                    if (isDate) {
-                                        current = new Date(that.props.year, that.props.month, d);
-                                        className = current != that.constructor.today ? 'cell cell__date' : 'cell cell__date';
-                                        return (<div className={className}
-                                                     role="button"
-                                                     key={i}> {
-                                            d
-                                        }
-                                        </div>)
-                                    }
-                                    return (
-                                        <div className="cell" key={i}></div>)
-                                })
 
-
-                            }
-                        </div>);
-                    })
+        renderDates = (d) => {
+            return weekStack.map(function (item, i) {
+                d += 1;
+                isDate = d > 0 && d <= daysInMonth;
+                if (isDate) {
+                    current = new Date(that.props.year, that.props.month, d);
+                    return (
+                        <div className="cell cell__date"
+                                 role="button"
+                                 key={i}> {d} </div>
+                    )
                 }
+                return (
+                    <div className="cell" key={i}></div>)
+            })
+        };
 
+        renderRows = () => {
+            return haystack.map(function (item, i) {
+                d = day + i * 7;
+                return (<div className="calendar__row" key={i}>
+                    {renderDates(d)}
+                </div>);
+            });
+        };
+
+        return (
+            <div className="cell__dates">
+                {renderRows()}
             </div>
-
         )
     }
 }
