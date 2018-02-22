@@ -12,6 +12,11 @@
 
 .calendar__title{
     flex-grow: 5;
+    align-items: center;
+    display: flex;
+    flex-basis: 0;
+    justify-content: center;
+    font-weight: bold;
 }
 
 .calendar:after{
@@ -25,6 +30,50 @@
     height: 100%;
     display: flex;
     flex-flow: column;
+}
+
+.calendar__nav_prev,
+.calendar__nav_next {
+    background-color: #ffffff;
+    cursor: pointer;
+    align-items: center;
+    display: flex;
+    flex-grow: 1;
+    flex-basis: 0;
+    justify-content: center;
+    font-weight: bold;
+}
+.calendar__header {
+    display: flex;
+    flex-flow: row;
+    flex-grow: 1;
+}
+
+.calendar__nav_prev:before,
+.calendar__nav_next:before {
+    content: "";
+    display: inline-block;
+    width: 0.6em;
+    height: 0.6em;
+    border-top: 0.2em solid #222222;
+    transform: rotate(-45deg);
+}
+
+.calendar__nav_prev:before {
+    border-left: 0.2em solid #222222;
+    transform: rotate(-45deg);
+    margin-left: 0.3em;
+}
+
+.calendar__nav_next:before {
+    border-right: 0.2em solid #222222;
+    transform: rotate(45deg);
+    margin-right: 0.3em;
+}
+
+.calendar__nav_prev:hover,
+.calendar__nav_next:hover {
+    background-color: pink;
 }
 
 

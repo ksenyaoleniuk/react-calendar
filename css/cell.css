@@ -20,6 +20,5 @@
 
 .cell__date:hover {
     background-color: pink;
-    border: solid 1px pink;
     color: #ffffff;
 }

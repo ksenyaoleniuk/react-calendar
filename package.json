@@ -10,6 +10,8 @@
     "webpack": "^3.11.0"
   },
   "scripts": {
+    "dev": "webpack --watch --progress",
+    "start": "npm run dev",
     "build": "webpack"
   },
   "dependencies": {},

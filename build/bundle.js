@@ -1000,7 +1000,6 @@ var Calendar = function (_Component) {
             month: date.getMonth(),
             startDay: 1,
             minDate: null,
-            disablePast: false,
             monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
             monthNamesFull: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
             firstOfMonth: null,
@@ -18454,17 +18453,44 @@ var MonthDates = function (_Component) {
     }
 
     _createClass(MonthDates, [{
+        key: "renderDay",
+        value: function renderDay(d, daysInMonth) {
+            return Array.apply(null, { length: 7 }).map(Number.call, Number).map(function (item, i) {
+                d += 1;
+                var dayOfMonth = d > 0 && d <= daysInMonth;
+                if (dayOfMonth) {
+                    return _react2.default.createElement(
+                        "div",
+                        { className: "cell cell__date",
+                            role: "button",
+                            key: i },
+                        " ",
+                        d,
+                        " "
+                    );
+                } else {
+                    return _react2.default.createElement("div", { className: "cell", key: i });
+                }
+            });
+        }
+    }, {
+        key: "renderRows",
+        value: function renderRows(day, rows, daysInMonth) {
+            var _this2 = this;
+
+            return Array.apply(null, { length: rows }).map(Number.call, Number).map(function (item, i) {
+                var d = day + i * 7;
+                return _react2.default.createElement(
+                    "div",
+                    { className: "calendar__row", key: i },
+                    _this2.renderDay(d, daysInMonth)
+                );
+            });
+        }
+    }, {
         key: "render",
         value: function render() {
-            var haystack = void 0,
-                day = void 0,
-                d = void 0,
-                current = void 0,
-                isDate = void 0,
-                renderDates = void 0,
-                renderRows = void 0,
-                weekStack = Array.apply(null, { length: 7 }).map(Number.call, Number),
-                that = this,
+            var day = void 0,
                 startDay = this.props.firstOfMonth.getUTCDay(),
                 first = this.props.firstOfMonth.getDay(),
                 rows = 5;
@@ -18476,48 +18502,16 @@ var MonthDates = function (_Component) {
                 rows = 6;
             }
 
-            haystack = Array.apply(null, { length: rows }).map(Number.call, Number);
             day = this.props.startDay + 1 - first;
             while (day > 1) {
                 day -= 7;
             }
             day -= 1;
 
-            renderDates = function renderDates(d) {
-                return weekStack.map(function (item, i) {
-                    d += 1;
-                    isDate = d > 0 && d <= daysInMonth;
-                    if (isDate) {
-                        current = new Date(that.props.year, that.props.month, d);
-                        return _react2.default.createElement(
-                            "div",
-                            { className: "cell cell__date",
-                                role: "button",
-                                key: i },
-                            " ",
-                            d,
-                            " "
-                        );
-                    }
-                    return _react2.default.createElement("div", { className: "cell", key: i });
-                });
-            };
-
-            renderRows = function renderRows() {
-                return haystack.map(function (item, i) {
-                    d = day + i * 7;
-                    return _react2.default.createElement(
-                        "div",
-                        { className: "calendar__row", key: i },
-                        renderDates(d)
-                    );
-                });
-            };
-
             return _react2.default.createElement(
                 "div",
                 { className: "cell__dates" },
-                renderRows()
+                this.renderRows(day, rows, daysInMonth)
             );
         }
     }]);
@@ -18566,16 +18560,16 @@ var Header = function (_Component) {
         value: function render() {
             return _react2.default.createElement(
                 "div",
-                { className: "calendar__row" },
-                _react2.default.createElement("div", { className: "cell arrow__prev",
+                { className: "calendar__header" },
+                _react2.default.createElement("div", { className: "calendar__nav_prev",
                     onClick: this.props.onPrev.bind(this),
                     role: "button" }),
                 _react2.default.createElement(
                     "div",
-                    { className: "cell calendar__title" },
+                    { className: "calendar__title" },
                     this.props.monthNames[this.props.month]
                 ),
-                _react2.default.createElement("div", { className: "cell arrow__next",
+                _react2.default.createElement("div", { className: "calendar__nav_next",
                     onClick: this.props.onNext.bind(this),
                     role: "button" })
             );
