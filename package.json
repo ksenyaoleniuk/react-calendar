@@ -1,5 +1,5 @@
 {
-    "devDependencies": {
+  "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
@@ -12,5 +12,21 @@
   "scripts": {
     "build": "webpack"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "name": "react-calendar",
+  "version": "1.0.0",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ksenyaoleniuk/react-calendar.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ksenyaoleniuk/react-calendar/issues"
+  },
+  "homepage": "https://github.com/ksenyaoleniuk/react-calendar#readme",
+  "description": ""
+
 }
