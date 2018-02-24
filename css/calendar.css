@@ -42,6 +42,7 @@
     flex-basis: 0;
     justify-content: center;
     font-weight: bold;
+    border: none;
 }
 .calendar__header {
     display: flex;

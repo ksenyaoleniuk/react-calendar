@@ -1,19 +1,17 @@
 import React, {Component} from 'react';
-import ReactDOM from "react-dom";
 import MonthDates from "../monthDates/MonthDates";
 import Header from "../header/Header";
 
+
 class Calendar extends Component {
+
     constructor() {
         super();
         let date = new Date();
         this.state = {
             year: date.getFullYear(),
             month: date.getMonth(),
-            startDay: 1,
             minDate: null,
-            monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-            monthNamesFull: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
             firstOfMonth: null,
             daysInMonth: null
         }
@@ -30,7 +28,7 @@ class Calendar extends Component {
 
     // change the state of the function calc with new Year and Month
     componentWillMount() {
-        this.setState(this.calc.call(null, this.state.year, this.state.month));
+        this.setState(this.calc(this.state.year, this.state.month));
     }
 
 
@@ -45,7 +43,7 @@ class Calendar extends Component {
             state.year = this.state.year - 1;
         }
         //copy previous Year and previous Month to the variable "state"
-        Object.assign(state, this.calc.call(null, state.year, state.month));
+        Object.assign(state, this.calc(state.year, state.month));
         //Change the function state with previous Year and month
         this.setState(state);
     }
@@ -62,7 +60,7 @@ class Calendar extends Component {
             state.year = this.state.year + 1;
         }
         //copy next Year and next Month to the variable "state"
-        Object.assign(state, this.calc.call(null, state.year, state.month));
+        Object.assign(state, this.calc(state.year, state.month));
         //Change the function state with previous Year and Month
         this.setState(state);
     }
@@ -72,7 +70,7 @@ class Calendar extends Component {
         return (
             <div className="calendar">
                 <div className="calendar__content">
-                    <Header monthNames={this.state.monthNamesFull}
+                    <Header
                             month={this.state.month}
                             year={this.state.year}
                             onPrev={() => {
@@ -83,11 +81,9 @@ class Calendar extends Component {
                             }}>
                     </Header>
                     <MonthDates month={this.state.month}
-
                                 year={this.state.year}
                                 daysInMonth={this.state.daysInMonth}
-                                firstOfMonth={this.state.firstOfMonth}
-                                startDay={this.state.startDay}>
+                                firstOfMonth={this.state.firstOfMonth}>
                     </MonthDates>
                 </div>
             </div>
@@ -96,5 +92,4 @@ class Calendar extends Component {
 }
 
 
-const wrapper = document.getElementById("calendar");
-wrapper ? ReactDOM.render(<Calendar/>, wrapper) : false;
+export default Calendar;
